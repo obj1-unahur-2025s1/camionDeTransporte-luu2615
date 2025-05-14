@@ -23,9 +23,12 @@ object bateriaAntiAerea {
 }
 object contenedorPortuario {
     var cosasGuardadas = []
-    var property peso = 100 + cosasGuardadas.sum(cosasGuardadas.map({cosa => cosa.peso()}))
+    var property peso = 100 + cosasGuardadas.map({cosa => cosa.peso()}).sum()
     var property peligrosidad = if (not self.tieneCosas()) 0 else cosasGuardadas.filter({cosa => cosa.peligrosidad() > 0}).max()
     method tieneCosas() = not cosasGuardadas.isEmpty()
+    method agregarCosas(cosa) {
+      cosasGuardadas.add(cosa)
+    }
 }
 object embalajeSeguridad {
     var property cosaEnvuelta = null
